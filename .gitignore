@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+/app/log/mysql/*.log
+/app/log/nginx/*.log
+/app/log/sendmail/*.log
+/app/db/*
+!/app/db/.gitkeep
