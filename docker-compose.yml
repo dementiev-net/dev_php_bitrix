@@ -1,9 +1,8 @@
-version: "3.1"
 services:
 
   mysql5.7:
     image: mysql:5.7
-    container_name: mysql5.7_bitrix
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
@@ -17,7 +16,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: nginx_bitrix
+    container_name: nginx
     working_dir: /etc/nginx
     volumes:
       - ./app:/app
@@ -50,7 +49,7 @@ services:
     build:
       context: ./config/php7.4
       dockerfile: Dockerfile
-    container_name: php_bitrix
+    container_name: php
     working_dir: /app
     volumes:
       - ./app:/app
@@ -65,7 +64,7 @@ services:
 #    build:
 #      context: ./config/php8.0
 #      dockerfile: Dockerfile
-#    container_name: php8.0
+#    container_name: php
 #    working_dir: /app
 #    volumes:
 #      - ./app:/app
