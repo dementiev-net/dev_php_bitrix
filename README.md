@@ -5,6 +5,7 @@
 * Хост БД: mysql5.7
 * Пользователь: root
 * Пароль: root
+* phpMyAdmin: http://localhost:8081/
 
 ### Работа с разными версиями PHP
 

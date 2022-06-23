@@ -1,7 +1,7 @@
 {
   "name": "docker_bitrix",
   "version": "1.0.0",
-  "description": "### Подключение к MySQL",
+  "description": "Окружение Bitrix (Nginx, PHP, Mysql)",
   "main": "app/www/index.php",
   "scripts": {
     "start": "docker-compose up",
