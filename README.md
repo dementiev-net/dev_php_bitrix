@@ -1,5 +1,29 @@
 # Окружение Bitrix (Nginx, PHP, Mysql)
 
+### Docker
+
+```console
+// загрузка из HUB
+docker images
+docker login
+
+docker pull dementievnet/phpmyadmin:latest
+docker pull dementievnet/mysql:latest
+docker pull dementievnet/nginx:latest
+docker pull dementievnet/php:latest
+
+// управление
+docker run
+docker-compose down
+
+// пересборка из 'Dockerfile'
+docker-compose up --build -d
+docker push phpdementievnet/php:latest
+
+// удаление неиспользованных контейнеров
+docker system prune
+```
+
 ### Подключение к MySQL
 
 * Хост БД: mysql5.7
@@ -10,7 +34,6 @@
 ### Работа с разными версиями PHP
 
 По умолчанию используется PHP 7.4.
-Чтобы выбрать версию PHP нужно редактировать файл ``docker-compose.yml``.
 
 ### Отправка e-mail'ов
 

@@ -1,7 +1,7 @@
 services:
 
-  mysql5.7:
-    image: mysql:5.7
+  db:
+    image: dementievnet/mysql:latest
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -15,7 +15,7 @@ services:
       - bitrix
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: dementievnet/phpmyadmin:latest
     container_name: phpmyadmin
     environment:
       - PMA_ARBITRARY=1
@@ -27,8 +27,8 @@ services:
     networks:
       - bitrix
 
-  nginx:
-    image: nginx:alpine
+  web:
+    image: dementievnet/nginx:latest
     container_name: nginx
     working_dir: /etc/nginx
     volumes:
@@ -45,46 +45,19 @@ services:
     links:
       - php
 
-  #  php:
-  #    build:
-  #      context: ./config/php7.3
-  #      dockerfile: Dockerfile
-  #    container_name: php
-  #    working_dir: /app
-  #    volumes:
-  #      - ./app:/app
-  #      - ./config/php7.3/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
-  #      - ./bin/sendmail:/usr/local/bin/sendmail
-  #    environment:
-  #        PHP_IDE_CONFIG: serverName=localhost
-
   php:
-    build:
-      context: ./config/php7.4
-      dockerfile: Dockerfile
+    image: dementievnet/php:latest
     container_name: php
-    working_dir: /app
+    working_dir: /app/www
     volumes:
       - ./app:/app
-      - ./config/php7.4/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
+      - ./config/php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
       - ./bin/sendmail:/usr/local/bin/sendmail
+    restart: always
     environment:
       PHP_IDE_CONFIG: serverName=localhost
     networks:
       - bitrix
-
-#  php:
-#    build:
-#      context: ./config/php8.0
-#      dockerfile: Dockerfile
-#    container_name: php
-#    working_dir: /app
-#    volumes:
-#      - ./app:/app
-#      - ./config/php8.0/php-ini-overrides.ini:/usr/local/etc/php/conf.d/00-php.ini
-#      - ./bin/sendmail:/usr/local/bin/sendmail
-#    environment:
-#        PHP_IDE_CONFIG: serverName=localhost
 
 networks:
   bitrix:
