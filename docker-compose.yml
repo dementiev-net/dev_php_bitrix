@@ -1,21 +1,22 @@
 services:
 
   db:
-    image: dementievnet/mysql:latest
+    image: dementievnet/mysql:v8.0
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_ROOT_HOST: '%'
     volumes:
+      - ./config/mysql/my.cnf:/etc/mysql/mysql.conf.d/my.cnf
       - ./app/db:/var/lib/mysql
-      - ./app/log/mysql:/var/log/mysql/
-      - ./config/mysql/conf.d:/etc/mysql/conf.d
     ports:
-      - "0.0.0.0:3306:3306"
+      - "127.0.0.1:3306:3306"
+    command: mysqld --sql_mode="" --character-set-server=utf8 --collation-server=utf8_slovenian_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
     networks:
       - bitrix
 
   phpmyadmin:
-    image: dementievnet/phpmyadmin:latest
+    image: dementievnet/phpmyadmin:v5.2.0
     container_name: phpmyadmin
     environment:
       - PMA_ARBITRARY=1
@@ -23,12 +24,12 @@ services:
     ports:
       - 8081:80
     environment:
-      PMA_HOST: mysql5.7
+      PMA_HOST: localhost
     networks:
       - bitrix
 
   web:
-    image: dementievnet/nginx:latest
+    image: dementievnet/nginx:v1.23.0
     container_name: nginx
     working_dir: /etc/nginx
     volumes:
@@ -46,7 +47,7 @@ services:
       - php
 
   php:
-    image: dementievnet/php:latest
+    image: dementievnet/php:v7.4
     container_name: php
     working_dir: /app/www
     volumes:

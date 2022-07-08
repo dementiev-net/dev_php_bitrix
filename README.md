@@ -7,33 +7,39 @@
 docker images
 docker login
 
-docker pull dementievnet/phpmyadmin:latest
-docker pull dementievnet/mysql:latest
-docker pull dementievnet/nginx:latest
-docker pull dementievnet/php:latest
+docker pull dementievnet/phpmyadmin:v5.2.0
+docker pull dementievnet/mysql:v8.0
+docker pull dementievnet/nginx:v1.23.0
+docker pull dementievnet/php:v7.4
 
 // управление
-docker run
+docker-compose uo
 docker-compose down
 
-// пересборка из 'Dockerfile'
+// пересборка
 docker-compose up --build -d
-docker push phpdementievnet/php:latest
 
 // удаление неиспользованных контейнеров
 docker system prune
+
+// mysql
+docker exec -it mysql /bin/bash
 ```
 
-### Подключение к MySQL
+### Подключение к MySQL 8.0.29
 
-* Хост БД: mysql5.7
+* Хост БД: db
 * Пользователь: root
-* Пароль: root
+* Пароль: 1234
 * phpMyAdmin: http://localhost:8081/
 
-### Работа с разными версиями PHP
+### Nginx 1.23.0
 
-По умолчанию используется PHP 7.4.
+...
+
+### PHP 7.4.30
+
+...
 
 ### Отправка e-mail'ов
 
